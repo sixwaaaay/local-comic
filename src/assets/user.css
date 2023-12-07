@@ -1,0 +1,22 @@
+
+.comic-view {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.comic-item {
+    width: 200px;
+    margin: 10px;
+}
+
+.comic-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.comic-name {
+    text-align: center;
+    margin: 10;
+}
