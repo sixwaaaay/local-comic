@@ -1,10 +1,13 @@
 <template>
-    <img v-for="item in images" :key="item.name" :src="item.url" :alt="item.name" loading="lazy" 
+    <img v-for="item in images" :key="item.name" :data-src="item.url" :alt="item.name"  class="lazyload"
          />
 </template>
 
 
 <script setup lang="ts">
+import 'lazysizes';
+// import a plugin
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import { useUrlMapperStore } from '@/stores/mapper';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
