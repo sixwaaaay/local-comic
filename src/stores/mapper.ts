@@ -15,7 +15,6 @@ export const useUrlMapperStore = defineStore('urlMapper', () => {
     if (url.endsWith('/'))
       url = url.slice(0, -1) // remove trailing slash
     baseUrl.value = url
-    console.log('set base url to', baseUrl.value)
     localStorage.setItem('baseUrl', baseUrl.value)
   }
 

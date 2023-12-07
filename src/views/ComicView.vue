@@ -20,7 +20,6 @@ interface Comic {
 }
 
 const urlMapping = useUrlMapperStore();
-// urlMapping.setBaseUrl("http://localhost:5058/")
 
 
 const covertUrl = (url: string) => `${urlMapping.baseUrl}/img/${url}`;
