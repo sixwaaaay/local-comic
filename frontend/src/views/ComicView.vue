@@ -1,14 +1,16 @@
 <template>
-    <div class="comic-view">
+    <div class="container">
+        <div class="comic-view">
         <div v-for="comic in comics" :key="comic.name" class="comic-item">
             <div>
                 <router-link :to="`/comic/${comic.name}`">
                     <img loading="lazy" :src="comic.thumbnail" alt="Comic Cover" class="comic-cover" />
-                    <p class="comic-name">{{ comic.name }}</p>
+                    <p class="comic-name comic-name-ellipsis">{{ comic.name }}</p>
                     <span class="comic-date">{{ covertDate(comic.createdAt) }}</span>
                 </router-link>
             </div>
         </div>
+    </div>
     </div>
 </template>
 <script lang="ts" setup>
