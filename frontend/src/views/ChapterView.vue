@@ -3,10 +3,14 @@
         <div v-for="ch in chapters" :key="ch.name" class="comic-item">
             <router-link :to="`/comic/${comicName}/${ch.name}`">
                 <img loading="lazy" :src="ch.thumbnail" alt="Comic Cover" class="comic-cover" />
-                <p class="comic-name">{{ ch.name }}</p>
+                <p :class="['comic-name', { 'comic-name-ellipsis': ellipsis }]">{{ ch.name }}</p>
                 <span class="comic-date">{{ covertDate(ch.createdAt) }}</span>
             </router-link>
         </div>
+
+        <button class="primary-button" role="button" type="button" @click="ellipsisSwitch">
+            {{ ellipsis ? '显示' : '隐藏' }}漫画名称
+        </button>
     </div>
 </template>
 
@@ -36,9 +40,7 @@ const chapters = ref<Chapter[]>([]);
 onMounted(async () => {
     try {
         const response = await fetch(`${urlMapping.baseUrl}/comics/${comicName}`, {
-            headers: {
-                'Accept': 'application/json',
-            },
+            headers: { 'Accept': 'application/json', },
         });
         let data = await response.json();
         data = data.map((ch: Chapter) => ({
@@ -50,4 +52,9 @@ onMounted(async () => {
         console.error('Failed to fetch comics:', error);
     }
 });
+
+/* enable comic name ellipsis */
+const ellipsis = ref<boolean>(true);
+const ellipsisSwitch = () => ellipsis.value = !ellipsis.value;
+
 </script>
