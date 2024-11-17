@@ -12,11 +12,11 @@ const router = createRouter({
     name: "comic",
     component: () => import('../views/ComicView.vue')
   }, {
-    path: "/comic/:name",
+    path: "/comic/chapters",
     name: "comic-detail",
     component: () => import('../views/ChapterView.vue')
   }, {
-    path: "/comic/:name/:chapter",
+    path: "/comic/comic-chapter",
     name: "comic-chapter",
     component: () => import('../views/ImageView.vue')
   }, {

@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useUrlMapperStore = defineStore('urlMapper', () => {
@@ -10,6 +10,8 @@ export const useUrlMapperStore = defineStore('urlMapper', () => {
   if (localBaseUrl) {
     setBaseUrl(localBaseUrl)
   }
+  /* fallback to current location */
+  setBaseUrl(window.location.origin)
 
   function setBaseUrl(url: string) {
     if (url.endsWith('/'))
@@ -17,7 +19,5 @@ export const useUrlMapperStore = defineStore('urlMapper', () => {
     baseUrl.value = url
     localStorage.setItem('baseUrl', baseUrl.value)
   }
-
-
   return { baseUrl, setBaseUrl }
 })
