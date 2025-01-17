@@ -1,20 +1,16 @@
-import { useUrlMapperStore } from '@/stores/mapper';
+import { useUrlStore } from '@/stores/mapper';
 import { ref, onMounted } from 'vue';
 
+type Comic = { name: string; thumbnail: string; createdAt: string; }
 
-
-export default function useComic() {
-    interface Comic { name: string; thumbnail: string; createdAt: string; }
-    const urlMapping = useUrlMapperStore();
-    const covUrl = (url: string) => `${urlMapping.baseUrl}/img/${url}`;
-
+function useComic() {
+    const { covertUrl: covUrl, comicsUrl: url } = useUrlStore();
     /* comics */
     const comics = ref<Comic[]>([]);
 
 
     onMounted(async () => {
         try {
-            const url = `${urlMapping.baseUrl}/comics`;
             const response = await fetch(url, { headers: { 'Accept': 'application/json', }, });
             let data: Comic[] = await response.json();
             comics.value = data.map(it => ({ ...it, thumbnail: covUrl(it.thumbnail), }));
@@ -24,3 +20,5 @@ export default function useComic() {
     });
     return { comics };
 }
+
+export default useComic;

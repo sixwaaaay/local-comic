@@ -1,10 +1,10 @@
-import { useUrlMapperStore } from '@/stores/mapper';
+import { useUrlStore } from '@/stores/mapper';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { buildQueryString } from '@/lib/query';
 
-interface Chapter { name: string; thumbnail: string; createdAt: string; }
+type Chapter = { name: string; thumbnail: string; createdAt: string; }
 
 
 export function useChapter() {
@@ -14,20 +14,16 @@ export function useChapter() {
     const comicName = route.query.name as string;
 
     /* load url */
-    const urlMapping = useUrlMapperStore();
-
-
-    const covertUrl = (url: string) => `${urlMapping.baseUrl}/img/${url}`;
-
+    const { covertUrl, chaptersUrl } = useUrlStore();
 
     const chapters = ref<Chapter[]>([]);
 
     /* load data */
     onMounted(async () => {
         try {
-            const url = buildQueryString(`${urlMapping.baseUrl}/comics/comics`, { comicName })
+            const url = buildQueryString(chaptersUrl, { comicName })
             const response = await fetch(url, { headers: { 'Accept': 'application/json' } });
-            let data: Chapter[] = await response.json();
+            const data: Chapter[] = await response.json();
             chapters.value = data.map(ch => ({ ...ch, thumbnail: covertUrl(ch.thumbnail) }));
         } catch (error) {
             console.error('Failed to fetch comics:', error);

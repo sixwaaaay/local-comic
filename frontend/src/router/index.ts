@@ -20,7 +20,7 @@ const router = createRouter({
     name: "comic-chapter",
     component: () => import('../views/ImageView.vue')
   }, {
-    path: "/set",
+    path: "/setting",
     name: "setting",
     component: () => import('../views/Settings.vue')
   }]

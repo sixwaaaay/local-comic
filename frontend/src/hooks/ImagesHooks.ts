@@ -1,5 +1,5 @@
 
-import { useUrlMapperStore } from '@/stores/mapper';
+import { useUrlStore } from '@/stores/mapper';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { buildQueryString } from '@/lib/query';
@@ -12,7 +12,7 @@ const useImages = () => {
     const comicName = route.query.name;
     const chapterName = route.query.chapter;
 
-    const urlMapping = useUrlMapperStore();
+    const urlMapping = useUrlStore();
 
     const covertUrl = (url: string) => `${urlMapping.baseUrl}/img/${url}`;
     const images = ref<Image[]>([]);
