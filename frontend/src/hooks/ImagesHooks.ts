@@ -1,6 +1,6 @@
 
 import { useUrlStore } from '@/stores/mapper';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { buildQueryString } from '@/lib/query';
 
@@ -28,7 +28,12 @@ const useImages = () => {
             console.error('Failed to fetch comics:', error);
         }
     });
-    return images;
+    const length = computed(() => images.value.length + 1);
+    const val = ref(0);
+    const updateVal = (e: Event) => {
+        window.location.hash = `#${val.value}`;
+    }
+    return { images, length, val, updateVal }
 }
 
 export default useImages;
