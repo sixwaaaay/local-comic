@@ -1,22 +1,11 @@
-<template>
-    <div class="settings">
-        <label for="baseurl">Base URL:</label>
-        <input type="text" id="baseurl" v-model="baseUrl" />
-        <div class="flex">
-            <button @click="setBaseUrl">set base url</button>
-            <button @click="resetBaseUrl">reset base url</button>
-        </div>
-    </div>
-</template>
-
 <script setup lang="ts">
-import { useUrlMapperStore } from '@/stores/mapper';
+import { useUrlStore } from '@/stores/mapper';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-const url = useUrlMapperStore();
+const url = useUrlStore();
 
-const baseUrl = ref("")
+const baseUrl = ref(url.baseUrl)
 
 
 const router = useRouter()
@@ -32,50 +21,20 @@ const resetBaseUrl = () => {
 }
 
 </script>
-
-<style scoped>
-.settings {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-
-/* CSS */
-button {
-    background-color: rgba(51, 51, 51, 0.05);
-    border-radius: 8px;
-    border-width: 0;
-    color: #333333;
-    cursor: pointer;
-    display: inline-block;
-    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    list-style: none;
-    margin: 0;
-    padding: 10px 12px;
-    text-align: center;
-    transition: all 200ms;
-    vertical-align: baseline;
-    white-space: nowrap;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-}
-
-input {
-    margin-top: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    padding: 0.5rem 1rem;
-    width: 100%;
-}
-
-.flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-</style>
+<template>
+    <div class="flex flex-col w-96 mx-auto">
+        <div class="w-full">
+            <label for="baseurl">Base URL:</label>
+        </div>
+        <input class="mt-2 px-3 py-2  bg-gray-100 rounded-xl focus:outline focus:outline-blue-500" type="text"
+            id="baseurl" v-model="baseUrl" />
+        <div class="flex w-full justify-between py-4">
+            <button
+                class="bg-blue-200 hover:bg-blue-300 text-blue-600 py-2 px-6 rounded-xl transition duration-500 ease-out active:scale-90"
+                @click="setBaseUrl">set base url</button>
+            <button
+                class="bg-purple-200 hover:bg-purple-300 text-purple-600 py-2 px-6 rounded-xl transition duration-500 ease-out active:scale-90"
+                @click="resetBaseUrl">reset base url</button>
+        </div>
+    </div>
+</template>
