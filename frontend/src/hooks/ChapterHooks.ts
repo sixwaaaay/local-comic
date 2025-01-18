@@ -32,6 +32,5 @@ export function useChapter() {
 
     /* enable comic name ellipsis */
     const ellipsis = ref<boolean>(true);
-    const ellipsisSwitch: () => boolean = (): boolean => ellipsis.value = !ellipsis.value;
-    return { chapters, ellipsis, ellipsisSwitch, comicName }
+    return { chapters, ellipsis, ellipsisSwitch: () => ellipsis.value = !ellipsis.value, comicName }
 }
